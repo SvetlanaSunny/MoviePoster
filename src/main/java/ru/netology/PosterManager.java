@@ -2,43 +2,37 @@ package ru.netology;
 
 public class PosterManager {
 
-  private int amountFilms = 10; // кол-во фильмов по умолчанию
-  private PosterObject[] poster = new PosterObject[0];
+  private PosterRepository repository;
 
-  public PosterManager() {
+  public PosterManager(PosterRepository repository){
+    this.repository = repository;
   }
 
-  public PosterManager(int amountFilms) {
-    this.amountFilms = amountFilms;
-  }
-
-  // добавление нового фильма
-  public void addFilm(PosterObject item) {
-    PosterObject[] newPoster = new PosterObject[poster.length + 1];
-    for (int i = 0; i < poster.length; i++) {
-      newPoster[i] = poster[i];
+  // возвращает массив всех хранящихся в массиве объектов
+  public  PosterObject [] getAll(){
+    PosterObject [] item = repository.findAll();
+    return item;
     }
-    newPoster[poster.length] = item;
-    poster = newPoster;
+
+
+  // добавляет объект в массив
+  public void addObject(PosterObject item){
+    repository.addFilm(item);
   }
 
-  // Вывод всех фильмов в порядке добавления
-  public PosterObject[] findAll() {
-    return poster;
+  //  возвращает объект по идентификатору
+  public PosterObject returnObject(int id){
+    return repository.findById(id);
+      }
+
+  //удаляет объект по идентификатору
+  public void removeById(int id){
+    repository.removeById(id);
   }
 
-  // Вывод последних добавленных фильмов в обратном от добавления порядке
-  public PosterObject[] findLast() {
-    int resultLength = poster.length;
-    if (resultLength > amountFilms) {
-      resultLength = amountFilms;
-    }
-    PosterObject[] newPoster = new PosterObject[resultLength];
-    int index = resultLength-1;
-    for (int i = 0; i < resultLength; i++) {
-      newPoster[index--] = poster[i];
-    }
-    poster = newPoster;
-    return poster;
+  //полностью вычищает репозиторий
+  public void removeAll(){
+    repository.removeAll();
   }
+
 }
