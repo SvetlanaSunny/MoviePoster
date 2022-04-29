@@ -61,7 +61,7 @@ public class PosterManagerTest {
     film.addFilm(eleven);
     film.addFilm(twelve);
     PosterObject[] actual = film.findLast();
-    PosterObject[] expected = {ninth, eighth, seventh, sixth, fifth, fourth, third, second, first};
+    PosterObject[] expected = {twelve, eleven, tenth, ninth, eighth, seventh, sixth, fifth, fourth};
     assertArrayEquals(expected, actual);
   }
 

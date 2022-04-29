@@ -34,11 +34,11 @@ public class PosterManager {
       resultLength = amountFilms;
     }
     PosterObject[] newPoster = new PosterObject[resultLength];
-    int index = resultLength-1;
-    for (int i = 0; i < resultLength; i++) {
-      newPoster[index--] = poster[i];
+    int index = 0;
+    for (int i = poster.length-1; i >= poster.length - resultLength; i--) {
+      newPoster[index] = poster[i];
+      index++;
     }
-    poster = newPoster;
-    return poster;
+    return newPoster;
   }
 }
